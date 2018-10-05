@@ -1,0 +1,56 @@
+{%extends "registration/base.html"%} {% load bootstrap4 %} {% load static %}
+
+{% block styles %}
+{% bootstrap_css %}
+<link rel="stylesheet"
+      href="{% static 'css/reg.css' %}">
+<link rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous">
+
+{% endblock %}
+{% block content %}
+<div class="container registration">
+    <div class="sign d-flex justify-content-center">
+        <!-- Empty div -->
+        <div class="signup col-md-4 col-sm-8 mt-4">
+            {% if form.errors %}
+            <div class="tag-line container mx-3">
+                <p> Some Information Might be Incorrect </p>
+            </div>
+            {% endif %}
+            <div class="card card-default">
+                <div class="card-heading">
+                    <h3 class="text-center">Instagram</h3>
+                    <p class="mx-3 text-center">Sign up to see photos and videos from your friends.</p>
+                </div>
+                <h3 class="text-center">Sign Up</h3>
+                <div class="card-body">
+
+                    <form action="/accounts/register/"
+                          method="post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit"
+                                   class="btn btn-primary btn-sm"
+                                   value="Sign Up">
+                        </div>
+
+                        <input type="hidden"
+                               name="next"
+                               value="{{next}}">
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- empty div -->
+    </div>
+</div>
+
+{% endblock %}
