@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='/accounts/login/')
 def home(request):
+    
     word = "Hello Instargram"
     return render(request, "socials/home.html", {"word": word})
 
@@ -17,3 +18,4 @@ def profile(request):
 def add_photo(request):
     newit = "This is a model"
     return render(request, "navbar.html", {"newit": newit})
+
