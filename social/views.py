@@ -7,3 +7,8 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     word = "Hello Instargram"
     return render(request, "socials/home.html", {"word": word})
+
+
+def profile(request):
+    profile = "These is a profile"
+    return render(request, "socials/profile.html", {"profile": profile})

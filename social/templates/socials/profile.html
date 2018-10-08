@@ -1,0 +1,44 @@
+{%extends 'socials/base.html'%}
+
+
+
+{% block content %}
+<div class="container">
+    <h1>{{profile}}</h1>
+    <div class="profile d-flex flex-row">
+        <div class="prof_image mr-4">
+            <img class="rounded-circle"
+                 style="
+                 width:12em;
+                 height:auto;"
+                 src="http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/aa6c1cd9-aa3b-4363-ac71-b1df745bc334/md/2119836-1446227222235-19sb9f.jpg">
+        </div>
+        <div class="info ml-4">
+            <div class="username d-flex flex-row">
+                <h3>ianodad</h3>
+                <button class="ml-4">Edit Profile</button>
+
+            </div>
+            <div class="pff d-flex flex-row mt-4">
+                <p class="p">0 posts</p>
+                <p class="f ml-3"> 0 follower</p>
+                <p class="f  ml-3"> 0 following</p>
+
+            </div>
+            <div class="cap">
+                <h3>Personal Name</h3>
+                <div class="div">
+                    Bio
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="photos">
+        <div class="card">
+            <img src="" alt="">
+        </div>
+    </div>
+
+</div>
+{% endblock %}

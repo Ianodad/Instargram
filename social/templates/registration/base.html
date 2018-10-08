@@ -1,5 +1,5 @@
 {% load bootstrap4 %}
-{% load staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 <html>
@@ -10,14 +10,11 @@
           content="width=device-width, initial-scale=1">
 
 
-    {%if title%}
-
-    <title>{{title}}</title>
-
-    {%endif%}
 
     {% block styles %}
     {% bootstrap_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
     {% endblock %}
 
 </head>
