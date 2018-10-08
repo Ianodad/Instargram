@@ -3,4 +3,6 @@ from .models import Profile, Post, Comment
 
 
 
-class ProfileForm(ModelForm)
+class ProfileInfo(ModelForm):
+    class meta:
+        model = 

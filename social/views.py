@@ -12,3 +12,8 @@ def home(request):
 def profile(request):
     profile = "These is a profile"
     return render(request, "socials/profile.html", {"profile": profile})
+
+
+def add_photo(request):
+    newit = "This is a model"
+    return render(request, "navbar.html", {"newit": newit})
