@@ -7,7 +7,7 @@ from pyuploadcare.dj.models import ImageField
 
 # Create your models here.
 
-class Profile (models.Model):
+class Profile(models.Model):
     '''
     profile class holding all the models
     '''
@@ -42,7 +42,7 @@ class Post(models.Model):
 
     @classmethod
     def get_post(cls, id):
-        post = Post.objects.filter(user=profile)
+        post = Post.objects.filter(user= profile)
         return post
 
     @classmethod
