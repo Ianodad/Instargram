@@ -8,7 +8,7 @@ from .models import Profile, Post, Comment
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        exclude = ["username"]
+        fields = ["bio"]
 
 
 class CommentForm(forms.ModelForm):
@@ -16,10 +16,10 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
 
-        exclude = ['post', 'user', 'date_posted', 'Likes']
+        fields = ['image', 'image_name', 'post_caption']
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        exclude = ['user', 'created']
+        fields = ['comment']
