@@ -2,11 +2,16 @@
 /*  ///////////////    */
 
 .profile {
-    margin-left: 30em;
+    margin-left: 10em;
 }
 
 p {
     color: green;
+}
+
+.motion {
+    width: 23em;
+    height: auto;
 }
 
 /* END OF PROFILE */

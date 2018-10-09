@@ -15,18 +15,20 @@ def home(request):
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             upload = form.save(commit=False)
-            upload.name = current_user
-            form.save()
+            upload.user = current_user
+            upload.save()
             return redirect('home')
 
     else:
         form = PostForm()
- 
-    return render(request, 'socials/home.html', {"word": word, "form": form })
+
+    posts = Post.get_all_posts()
+    return render(request, 'socials/home.html', {"word": word, "form": form, "posts": posts})
 
 
 def profile(request):
     profile = "These is a profile"
+    current_user = request.user
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
@@ -38,7 +40,10 @@ def profile(request):
 
     else:
         form = ProfileForm()
-    return render(request, "socials/profile.html", {"profile": profile, "form":form})
+
+    posts = Post.get_post(current_user)
+
+    return render(request, "socials/profile.html", {"profile": profile, "form": form, "posts": posts})
 
 
 def add_photo(request):

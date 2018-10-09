@@ -33,8 +33,8 @@ class Post(models.Model):
     '''
     image = ImageField(manual_crop='800x800')
     image_name = models.TextField(default=False)
-    user = models.ForeignKey(Profile, null=True, related_name='posts')
-    post_caption = models.TextField(default=False)
+    user = models.ForeignKey(User, null=True, related_name='posts')
+    post_caption = models.TextField(max_length="300")
     created = models.DateField(auto_now_add=True, db_index=True)
 
     def post(self):
@@ -42,15 +42,15 @@ class Post(models.Model):
 
     @classmethod
     def get_post(cls, id):
-        post = Post.objects.filter(user= profile)
+        post = Post.objects.filter(user= id)
         return post
 
     @classmethod
-    def get_posts(cls):
+    def get_all_posts(cls):
         posts = Post.objects.all()
         return posts
 
-
+    
 class Comment(models.Model):
     '''
     comments model for users

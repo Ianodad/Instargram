@@ -4,32 +4,54 @@
 {% block content %}
 <div class="container">
     {{word}}
-    <div class="modal fade modal-bottom"
-         id="uploadimage">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">SELECT IMAGE</h5>
-                    <button class="close"
-                            data-dismiss="modal"><span>&times;</span></button>
-                </div>
-                <div class="modal-body">
 
-                    <form class="d-flex flex-column"
-                          action="{% url 'home' %}"
-                          method="POST"
-                          enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ form}}
-                        <input type="submit"
-                               class="btn btn-success btn-lg"
-                               value="POST">
-                    </form>
 
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary">Close</button>
-                </div>
+    {% for post in posts %}
+    <div class="card"
+         style="width: 40rem;">
+        <div class="card-header">
+            Featured
+        </div>
+        <img class="card-img-top"
+             src="{{post.image}}"
+             alt="Card image cap">
+        <div class="card-body">
+            <a href="#"
+               class="card-link">Card link</a>
+            <a href="#"
+               class="card-link">Another link</a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+
+</div>
+<div class="modal fade modal-bottom"
+     id="uploadimage">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SELECT IMAGE</h5>
+                <button class="close"
+                        data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">
+
+                <form class="d-flex flex-column"
+                      action="{% url 'home' %}"
+                      method="POST"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form}}
+                    <input type="submit"
+                           class="btn btn-success btn-lg"
+                           value="POST">
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary">Close</button>
             </div>
         </div>
     </div>
