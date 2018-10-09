@@ -4,8 +4,7 @@ from django.forms import ModelForm
 from .models import Profile, Post, Comment
 
 
-
-class ProfileForm(ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ["bio"]
@@ -16,10 +15,11 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
 
-        fields = ['image', 'image_name', 'post_caption']
+        fields = ['comment']
+
 
 class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ['comment']
+        fields = ['image', 'image_name', 'post_caption']
