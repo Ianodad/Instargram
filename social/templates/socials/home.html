@@ -7,21 +7,28 @@
 
 
     {% for post in posts %}
-    <div class="card"
+    <div class="card mt-4"
          style="width: 40rem;">
         <div class="card-header">
-            Featured
+            <img src="{{post.user.posts.profile_picture}}"
+                 alt="">
+            <a href="">{{post.user}}</a>
         </div>
         <img class="card-img-top"
              src="{{post.image}}"
              alt="Card image cap">
         <div class="card-body">
-            <a href="#"
-               class="card-link">Card link</a>
-            <a href="#"
-               class="card-link">Another link</a>
+            <div class="icons d-flex flex-row">
+                <p class="card-text"><i class="far fa-heart"></i></p>
+                <p class="card-text ml-3"><i class="far fa-comment"></i></p>
+            </div>
+            <p class="card-text">Likes</p>
+            <div class="caption d-flex flex-row">
+                <a href="#"
+                   class="card-link">{{post.user}}</a>
+                <p class="captioned ml-2">{{post.post_caption}}</p>
+            </div>
         </div>
-
     </div>
     {% endfor %}
 
