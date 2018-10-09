@@ -1,11 +1,16 @@
 <div class="container-fluid">
     <nav class="navbar navbar-light bg-light justify-content-center fixed-bottom">
         <a class="navbar-brand"><i class="fas fa-home"></i></a>
-        <form class="form-inline">
+        <form class="form-inline"
+              method="GET"
+              role="search"
+              action="{%url search %}">
             <input class="form-control mr-sm-2"
                    type="search"
-                   placeholder="Search"
-                   aria-label="Search">
+                   placeholder="Search Profiles"
+                   aria-label="Search"
+                   name="profiles">
+
             <button class="btn btn-outline-success my-2 my-sm-0"
                     type="submit">Search</button>
         </form>
