@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from django.conf.global_settings import LOGIN_REDIRECT_URL
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'social',
     'bootstrap4',
     'django.contrib.admin',
@@ -125,10 +129,12 @@ UPLOADCARE = {
     'secret': 'dd1f9912be9bc5bc77b0',
 }
 
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-
+LOGIN_REDIRECT_URL = "profile"
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),

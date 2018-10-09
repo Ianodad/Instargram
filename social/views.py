@@ -1,15 +1,15 @@
 from urllib import request
 
 from .forms import CommentForm, PostForm, ProfileForm
-from .models import Comment, Post, Profile
+from .models import Comment, Post, Profile, User
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
 
 # Create your views here.
 
 
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def home(request):
     word = "Hello Instargram"
 
@@ -31,8 +31,8 @@ def home(request):
     return render(request, 'socials/home.html', {"word": word, "form": form, "posts": posts})
 
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
-    profile = "These is a profile"
     current_user = request.user
 
     if request.method == 'POST':
@@ -40,41 +40,46 @@ def profile(request):
         if form.is_valid():
             upload = form.save(commit=False)
             upload.name = current_user
-            form.save()
+            upload.save()
             return redirect('profile')
 
     else:
-        form = ProfileForm()
-
+        formit = ProfileForm()
+    print(request.id)
     posts = Post.get_post(current_user)
+    profile = Profile.get_profile(current_user)
+    return render(request, "socials/profile.html", {"profile": profile, "formit": formit, "posts": posts})
 
-    return render(request, "socials/profile.html", {"profile": profile, "form": form, "posts": posts})
 
-
+@login_required(login_url='/accounts/login/')
 def comment(request):
 
+    current_user = request.user
+    posts = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = CommentForm(request.POST, request.FILES)
         if form.is_valid():
-            upload = form.save(commit=False)
-            upload.name = current_user
-            form.save()
-            return redirect('profile')
+            comment = form.save(commit=False)
+            comment.posts = posts
+            comment.user = current_user
+            comment.save()
+        return redirect('profile')
 
-    else:
-        form = ProfileForm()
-    return render(request, "'socials/home.html'", {"newit": newit})
+    # else:
+    #     commentform = ProfileForm()
+    # return render(request, "'socials/home.html'", {"newit": newit})
 
 
+@login_required(login_url='/accounts/login/')
 def search(request):
     if 'profiles' in request.GET and request.GET['profiles']:
         search_term = request.GET.get('profiles')
         user = User.objects.filter(username=search_term)
-        Profiles = Profile.objects.filter(username=user)
+        profiles = Profile.objects.filter(username=user)
         message = f'{search_term}'
 
-        return render(request, 'search.html', {"message": message, "profiles": profiles})
+        return render(request, 'socials/search.html', {"message": message, "profiles": profiles})
     else:
         message = "Please search for users"
 
-    return render(request, 'search.html', {"message": message, "profiles": profile})
+    return render(request, 'socials/search.html', {"message": message, "profiles": profile})

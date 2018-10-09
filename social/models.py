@@ -12,7 +12,7 @@ class Profile(models.Model):
     profile class holding all the models
     '''
     username = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True, related_name="profile")
     name = models.TextField(default="Anonymous")
     profile_picture = ImageField(
         manual_crop='200x200')
@@ -24,6 +24,11 @@ class Profile(models.Model):
     def update_Profile(self, update):
         self.profile_bio = update
         self.save()
+
+    @classmethod
+    def get_profile(cls, name):
+        profile = Profile.objects.filter(name=name)
+        return profile
 
 
 class Post(models.Model):
@@ -42,7 +47,7 @@ class Post(models.Model):
 
     @classmethod
     def get_post(cls, id):
-        post = Post.objects.filter(user= id)
+        post = Post.objects.filter(user=id)
         return post
 
     @classmethod
@@ -50,7 +55,7 @@ class Post(models.Model):
         posts = Post.objects.all()
         return posts
 
-    
+
 class Comment(models.Model):
     '''
     comments model for users

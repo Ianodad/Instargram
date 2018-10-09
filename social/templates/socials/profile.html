@@ -1,17 +1,18 @@
 {%extends 'socials/base.html'%}
+{% load crispy_forms_tags %}
 
 
 
 {% block content %}
 <div class="container">
-    <h1>{{profile}}</h1>
+    <h1>{{profile.name}}</h1>
     <div class="profile d-flex flex-row">
         <div class="prof_image mr-4">
             <img class="rounded-circle"
                  style="
                  width:12em;
                  height:auto;"
-                 src="http://s3.amazonaws.com/cdn.roosterteeth.com/uploads/images/aa6c1cd9-aa3b-4363-ac71-b1df745bc334/md/2119836-1446227222235-19sb9f.jpg">
+                 src="{{profile.profile_picture}}">
         </div>
         <div class="info ml-4">
             <div class="username d-flex flex-row">
@@ -30,7 +31,7 @@
             <div class="cap">
                 <h3>Personal Name</h3>
                 <div class="div">
-                    Bio
+                    {{profile.bio}}
                 </div>
             </div>
 
@@ -63,7 +64,7 @@
                       method="POST"
                       enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form }}
+                    {{ formit | crispy }}
                     <input type="submit"
                            class="btn btn-success btn-lg"
                            value="POST">
@@ -72,8 +73,6 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary">Close</button>
-                <button class="btn btn-secondary">Save/button>
-
             </div>
         </div>
     </div>
@@ -94,7 +93,7 @@
                       method="POST"
                       enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form}}
+                    {{ form | crispy }}
                     <input type="submit"
                            class="btn btn-success btn-lg"
                            value="POST">
