@@ -121,8 +121,8 @@ USE_TZ = True
 UPLOADCARE = {
     # Don’t forget to set real keys when it gets real :)
 
-    'pub_key': 'demopublickey',
-    'secret': 'demoprivatekey',
+    'pub_key': '5519c93d42e8dc3586b9',
+    'secret': 'dd1f9912be9bc5bc77b0',
 }
 
 # Static files (CSS, JavaScript, Images)

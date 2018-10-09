@@ -15,7 +15,7 @@ class Profile(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     name = models.TextField(default="Anonymous")
     profile_picture = ImageField(
-        default=True, manual_crop='200x200')
+        manual_crop='200x200')
     bio = models.TextField(default="Tell us more")
 
     def save_profile(self):
@@ -31,9 +31,9 @@ class Post(models.Model):
     '''
     user post of images and the comments
     '''
-    image = ImageField(default=True, manual_crop='800x800')
+    image = ImageField(manual_crop='800x800')
     image_name = models.TextField(default=False)
-    user = models.ForeignKey(Profile, related_name='posts')
+    user = models.ForeignKey(Profile, null=True, related_name='posts')
     post_caption = models.TextField(default=False)
     created = models.DateField(auto_now_add=True, db_index=True)
 
