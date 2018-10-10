@@ -10,7 +10,7 @@
     <div class="card mt-4"
          style="width: 40rem;">
         <div class="card-header">
-            <img src="{{post.user.posts.profile_picture}}"
+            <img src="{{post.}}"
                  alt="">
             <a href="">{{post.user}}</a>
         </div>
@@ -28,6 +28,25 @@
                    class="card-link">{{post.user}}</a>
                 <p class="captioned ml-2">{{post.post_caption}}</p>
             </div>
+            {% for comment in post.comments.all %}
+            {{ comment.user.username}}
+            {{comment.comment }}
+            {% endfor %}
+            <form action="{% url 'comment' post_id=post.id %}"
+                  enctype="multipart/form-data"
+                  novalidate
+                  method="post">
+                {% csrf_token %}
+                <input class="add-comment"
+                       name="comment"
+                       id="comment{{post.id}}"
+                       type="text"
+                       placeholder="Comment on this image....">
+                <button type="submit"
+                        class="btn btn-default"
+                        style="margin-left: 0em;">comment</button>
+            </form>
+
         </div>
     </div>
     {% endfor %}

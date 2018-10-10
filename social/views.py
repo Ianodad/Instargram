@@ -45,14 +45,13 @@ def profile(request):
 
     else:
         formit = ProfileForm()
-    print(request.id)
     posts = Post.get_post(current_user)
     profile = Profile.get_profile(current_user)
     return render(request, "socials/profile.html", {"profile": profile, "formit": formit, "posts": posts})
 
 
 @login_required(login_url='/accounts/login/')
-def comment(request):
+def comment(request, post_id):
 
     current_user = request.user
     posts = get_object_or_404(Post, pk=post_id)
