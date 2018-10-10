@@ -19,7 +19,8 @@
         <img class="card-img-top"
              src="{{post.image}}"
              alt="Card image cap"
-             data-toggle="modal" data-target="#{{post.image}}">
+             data-toggle="modal"
+             data-target="#{{post.image}}">
         <div class="card-body">
             <div class="icons d-flex flex-row">
                 <p class="card-text"><i class="far fa-heart"></i></p>
@@ -52,19 +53,25 @@
 
         </div>
     </div>
-    <div class="card modal fade id="{{post.image}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"">
-        <div class="card-body">
+    <div class="card modal fade id="
+         {{post.image}}" tabindex="
+         -1"
+         role="dialog"
+         aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true"">
+        <div class="
+         card-body">
         <img class="card-img-top"
-             src="{{post.image}}"
+             src="{{post.image.url}}"
              alt="Card image cap">
-        </div>
     </div>
-    {% endfor %}
+</div>
+{% endfor %}
 
 
 </div>
 
-{% comment %} modal for posting image  {% endcomment %}
+{% comment %} modal for posting image {% endcomment %}
 <div class="modal fade modal-bottom"
      id="uploadimage">
     <div class="modal-dialog modal-lg">
@@ -94,9 +101,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 {% endblock %}
