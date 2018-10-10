@@ -1,22 +1,27 @@
 <div class="container-fluid">
-    <nav class="navbar navbar-light bg-light justify-content-center fixed-bottom">
-        
-        <a class="navbar-brand"><i class="fas fa-home"></i></a>
-        <form class="form-inline"
-              method="GET"
-              role="search"
-              action="{% url 'search' %}">
-            <input class="form-control mr-sm-2"
-                   type="search"
-                   placeholder="Search Profiles"
-                   aria-label="Search"
-                   name="profiles">
+    <nav class="navbar navbar-light bg-light  fixed-bottom justify-content-around block-example border-top border-dark">
+        <div class="home-icon">
+            <a class="navbar-brand"><i class="fas fa-home fa-2x"></i></a>
+        </div>
+        <div class="search-nav">
+            <form class="form-inline"
+                  method="GET"
+                  role="search"
+                  action="{% url 'search' %}">
+                <input class="form-control mr-sm-2"
+                       type="search"
+                       placeholder="Search Profiles"
+                       aria-label="Search"
+                       name="profiles">
 
-            <button class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit">Search</button>
-        </form>
-        <a data-toggle="modal"
-           data-target="#uploadimage"
-           href="#"><i class="fas fa-camera-retro"></i></a>
+                <button class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit">Search</button>
+            </form>
+        </div>
+        <div class="upload">
+            <a data-toggle="modal"
+               data-target="#uploadimage"
+               href="#"><i class="fas fa-camera-retro fa-2x"></i></a>
+        </div>
     </nav>
 </div>
