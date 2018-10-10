@@ -1,4 +1,6 @@
-{%extends 'socials/base.html'%}
+{% extends 'socials/base.html'%}
+{% load crispy_forms_tags %}
+
 
 
 {% block content %}
@@ -16,7 +18,8 @@
         </div>
         <img class="card-img-top"
              src="{{post.image}}"
-             alt="Card image cap">
+             alt="Card image cap
+             data-toggle="modal" data-target="#{{post.id}}"">
         <div class="card-body">
             <div class="icons d-flex flex-row">
                 <p class="card-text"><i class="far fa-heart"></i></p>
@@ -49,16 +52,25 @@
 
         </div>
     </div>
+    <div class="card modal fade id="{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"">
+<div class="card-body">
+<img class="card-img-top"
+             src="{{post.image}}"
+             alt="Card image cap">
+</div>
+</div>
     {% endfor %}
 
 
 </div>
+
+{% comment %} modal for posting image  {% endcomment %}
 <div class="modal fade modal-bottom"
      id="uploadimage">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">SELECT IMAGE</h5>
+                <h5 class="modal-title">POST IMAGE</h5>
                 <button class="close"
                         data-dismiss="modal"><span>&times;</span></button>
             </div>
@@ -69,7 +81,7 @@
                       method="POST"
                       enctype="multipart/form-data">
                     {% csrf_token %}
-                    {{ form}}
+                    {{ form | crispy }}
                     <input type="submit"
                            class="btn btn-success btn-lg"
                            value="POST">
@@ -82,5 +94,9 @@
         </div>
     </div>
 </div>
+
+
+
+
 
 {% endblock %}

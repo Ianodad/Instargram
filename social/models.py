@@ -49,7 +49,7 @@ class Post(models.Model):
     user post of images and the comments
     '''
     image = ImageField(manual_crop='800x800')
-    image_name = models.TextField(default=False)
+    image_name = models.TextField(max_length="40")
     user = models.ForeignKey(User, null=True, related_name='posts')
     post_caption = models.TextField(max_length="300")
     created = models.DateField(auto_now_add=True, db_index=True)
