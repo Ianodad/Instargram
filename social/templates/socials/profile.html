@@ -6,38 +6,40 @@
 {% block content %}
 <div class="container">
     <h1>{{profile.name}}</h1>
-    <div class="profile d-flex flex-row">
-        <div class="prof_image mr-4">
-            <img class="rounded-circle"
-                 style="
+    <div class="container profile d-flex flex-row block-example border-bottom border-dark">
+        <div class="profile_info">
+            <div class="prof_image mr-4">
+                <img class="rounded-circle"
+                     style="
                  width:12em;
                  height:auto;"
-                 src="{{profile.profile_picture.url}}">
-        </div>
-        <div class="info ml-4">
-            <div class="username d-flex flex-row">
-                <h3>ianodad</h3>
-                <button class="ml-4"
-                        data-toggle="modal"
-                        data-target="#editmodel">Edit Profile</button>
-
+                     src="{{profile.profile_picture.url}}">
             </div>
-            <div class="pff d-flex flex-row mt-4">
-                <p class="p">0 posts</p>
-                <p class="f ml-3"> 0 follower</p>
-                <p class="f  ml-3"> 0 following</p>
+            <div class="info ml-4">
+                <div class="username d-flex flex-row">
+                    <h3>ianodad</h3>
+                    <button class="ml-4"
+                            data-toggle="modal"
+                            data-target="#editmodel">Edit Profile</button>
 
-            </div>
-            <div class="cap">
-                <h3>Personal Name</h3>
-                <div class="div">
-                    {{profile.bio}}
                 </div>
-            </div>
+                <div class="pff d-flex flex-row mt-4">
+                    <p class="p">0 posts</p>
+                    <p class="f ml-3"> 0 follower</p>
+                    <p class="f  ml-3"> 0 following</p>
 
+                </div>
+                <div class="cap">
+                    <h3>Personal Name</h3>
+                    <div class="div">
+                        {{profile.bio}}
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-    <div class="photos d-flex flex-wrap">
+    <div class="photos d-flex flex-wrap container-fluid mt-4">
         {% for post in posts %}
         <div class="col-md-4">
             <img class="my-2"

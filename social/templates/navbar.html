@@ -1,9 +1,10 @@
 <div class="container-fluid">
     <nav class="d-flex flex-box navbar navbar-expand-lg sticky-top navbar-light bg-light border-bottom justify-content-center block-example border-bottom border-dark">
         <a class="navbar-brand block-example block-example"
-           href="#"><i class="fab fa-instagram fa-2x"></i></a>
+           href="http://127.0.0.1:8000"><i class="fab fa-instagram fa-2x"></i></a>
         <a class="logo navbar-brand justify-content-center block-example border-left border-dark pl-4"
-           href="#"  style="font-family: 'Oleo Script', cursive; font-size:2em;">Instagram</a>
+           href="http://127.0.0.1:8000"
+           style="font-family: 'Oleo Script', cursive; font-size:2em;">Instagram</a>
         <div class="col-sm-6 col-md-6">
             {% if user.is_authenticated %}
             <ul class="float-right">
@@ -18,7 +19,7 @@
                     <ul class="dropdown-menu"
                         role="menu">
                         <li>
-                            <a href="">Home</a>
+                            <a href="http://127.0.0.1:8000">Home</a>
                         </li>
                         <li>
                             <a href="/profile">Profile</a>

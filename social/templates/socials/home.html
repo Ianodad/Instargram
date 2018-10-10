@@ -12,14 +12,14 @@
     <div class="card mt-4"
          style="width: 40rem;">
         <div class="card-header">
-            <img src="{{post.}}"
+            <img src="{{post}}"
                  alt="">
             <a href="">{{post.user}}</a>
         </div>
         <img class="card-img-top"
              src="{{post.image}}"
-             alt="Card image cap
-             data-toggle="modal" data-target="#{{post.id}}"">
+             alt="Card image cap"
+             data-toggle="modal" data-target="#{{post.image}}">
         <div class="card-body">
             <div class="icons d-flex flex-row">
                 <p class="card-text"><i class="far fa-heart"></i></p>
@@ -52,13 +52,13 @@
 
         </div>
     </div>
-    <div class="card modal fade id="{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"">
-<div class="card-body">
-<img class="card-img-top"
+    <div class="card modal fade id="{{post.image}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true"">
+        <div class="card-body">
+        <img class="card-img-top"
              src="{{post.image}}"
              alt="Card image cap">
-</div>
-</div>
+        </div>
+    </div>
     {% endfor %}
 
 
