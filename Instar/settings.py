@@ -53,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+
 ]
 
 ROOT_URLCONF = 'Instar.urls'
@@ -83,9 +85,11 @@ WSGI_APPLICATION = 'Instar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'instar',
-        'USER': 'renegade',
-        'PASSWORD': 'instargram',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('instargram'),
+        'HOST': config('DB_HOST'),
+
     }
 }
 
@@ -126,8 +130,8 @@ USE_TZ = True
 UPLOADCARE = {
     # Don’t forget to set real keys when it gets real :)
 
-    'pub_key': '5519c93d42e8dc3586b9',
-    'secret': 'dd1f9912be9bc5bc77b0',
+    'pub_key': config('PUB_KEY'),
+    'secret': config('SECRET'),
 }
 
 
@@ -136,6 +140,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 LOGIN_REDIRECT_URL = "profile"
 STATIC_URL = '/static/'
@@ -147,3 +156,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Configure Django App for Heroku.
+django_heroku.settings(locals())
