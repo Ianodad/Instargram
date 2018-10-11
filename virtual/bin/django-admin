@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/home/renegade/Documents/Moringa Core/Django/week 2/Instar/Instar/virtual/bin/python" "$0" "$@"
+'''exec' "/home/renegade/Documents/Moringa Core/Django/week 2/Thursday/Instar/virtual/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

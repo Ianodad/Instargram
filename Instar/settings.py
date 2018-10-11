@@ -11,24 +11,41 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import django_heroku
+import dj_database_url
+from decouple import config, Csv
 
-from django.conf.global_settings import LOGIN_REDIRECT_URL
-
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+MODE = config("MODE", default="dev")
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+# development
+if config('MODE') == "dev":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': '',
+        }
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6*@zfc1p_8i!j8iqz-m=^h5)qz8vo63k5_mzfm@+qri4nkf-i9'
+    }
+# production
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 
 # Application definition
@@ -84,12 +101,10 @@ WSGI_APPLICATION = 'Instar.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('instargram'),
-        'HOST': config('DB_HOST'),
-
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'instar',
+        'USER': 'renegade',
+        'PASSWORD': 'instargram',
     }
 }
 
@@ -136,7 +151,6 @@ UPLOADCARE = {
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
