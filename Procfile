@@ -1,1 +1,1 @@
-web: gunicorn instarglam.wsgi
+web: gunicorn Instar.wsgi
