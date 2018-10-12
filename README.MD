@@ -35,4 +35,4 @@ This application allows user to create and login into a profile. The user can th
  * pip3 install django==1.11 django-heroku gunicorn whitenoise python-decouple whitenoise django-bootstrap4
 
 ## Licence
-MIT (c) 2017 [Ian Odhiambo](https://github.com/ianodad)
+MIT (c) 2018 [Ian Odhiambo](https://github.com/ianodad)

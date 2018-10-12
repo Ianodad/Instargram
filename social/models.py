@@ -2,19 +2,9 @@ from distutils.command import upload
 from django.contrib.auth.models import User
 from django.db import models
 from pyuploadcare.dj.models import ImageField
+from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 
 # Create your models here.
@@ -24,7 +14,7 @@ class Profile(models.Model):
     profile class holding all the models
     '''
     username = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True, related_name="profile")
+        settings.AUTH_USER_MODEL)
     name = models.TextField(default="Anonymous")
     profile_picture = ImageField(
         manual_crop='200x200')
@@ -41,6 +31,28 @@ class Profile(models.Model):
     def get_profile(cls, name):
         profile = Profile.objects.filter(name=name)
         return profile
+
+
+def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        try:
+            Profile.objects.create(user=instance)
+        except Exception as error:
+            print(error)
+
+
+post_save.connect(post_save_user_model_receiver,
+                  sender=settings.AUTH_USER_MODEL)
+
+# @receiver(post_save, sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         Profile.objects.create(user=instance)
+
+
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
 
 
 class Post(models.Model):
