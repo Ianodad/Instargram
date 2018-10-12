@@ -89,7 +89,7 @@ class Comment(models.Model):
     '''
     comment = models.TextField(null=True)
     post = models.ForeignKey(Post, related_name='comments')
-    user = models.ForeignKey(Profile, related_name='comments')
+    user = models.ForeignKey(User, related_name='comments', null=True)
     date_posted = models.DateTimeField(auto_now=True)
     likes = models.BooleanField(default=False)
 

@@ -27,7 +27,7 @@ def home(request):
         form = PostForm()
 
     posts = Post.get_all_posts()
-
+    # print((posts[1].comments.all()))
     return render(request, 'socials/home.html', {"word": word, "form": form, "posts": posts})
 
 
@@ -56,13 +56,13 @@ def comment(request, post_id):
     current_user = request.user
     posts = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
-        form = CommentForm(request.POST, request.FILES)
+        form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.posts = posts
             comment.user = current_user
             comment.save()
-        return redirect('profile')
+        return redirect('home')
 
     # else:
     #     commentform = ProfileForm()
