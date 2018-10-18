@@ -4,19 +4,64 @@
 {% block content %}
 
 <div class="container">
-    <div class="row">
-        {% if profiles %}
-        <h2>Found {{profiles | length }} of searched { {message }}</h2>
-        {% else %}
-        <h2> Found 0 profiles found</h2>
-        {% endif %}
+    {% for post in results %}
+    <div class="card mt-4"
+         style="width: 40rem;">
+        <div class="card-header">
+            <img src="{{post}}"
+                 alt="">
+            <a href="">{{post.user}}</a>
+        </div>
+        <img class="card-img-top"
+             src="{{post.image}}"
+             alt="Card image cap"
+             data-toggle="modal"
+             data-target="#{{post.image}}">
+        <div class="card-body">
+            <div class="icons d-flex flex-row">
+                <p class="card-text"><i class="far fa-heart"></i></p>
+                <p class="card-text ml-3"><i class="far fa-comment"></i></p>
+            </div>
+            <p class="card-text">Likes</p>
+            <div class="caption d-flex flex-row">
+                <a href="#"
+                   class="card-link">{{post.user}}</a>
+                <p class="captioned ml-2">{{post.post_caption}}</p>
+            </div>
+            {% for comment in post.comments.all %} {{ comment.user.username}} {{comment.comment }} {% endfor %}
+            <form action="{% url 'comment' post_id=post.id %}"
+                  enctype="multipart/form-data"
+                  novalidate
+                  method="post">
+                {% csrf_token %}
+                <input class="add-comment"
+                       name="comment"
+                       id="comment{{post.id}}"
+                       type="text"
+                       placeholder="Comment on this image....">
+                <button type="submit"
+                        class="btn btn-default"
+                        style="margin-left: 0em;">comment</button>
+            </form>
 
+        </div>
     </div>
-</div>
+    <div class="card modal fade id="
+         {{post.image}} " tabindex="
+         -1 "
+         role="
+         dialog "
+         aria-labelledby="
+         exampleModalCenterTitle "
+         aria-hidden="
+         true "">
+        <div class="
+         card-body">
+            <img class="card-img-top"
+                 src="{{post.image.url}}"
+                 alt="Card image cap">
+        </div>
+    </div>
+    {% endfor %}
 
-{% if profiles %}
-{% for profile in profiles %}
-{{profile.name}}
-{% endfor %}
-{% endif %}
-{% endblock %}
+    {% endblock %}

@@ -5,6 +5,7 @@ from .models import Comment, Post, Profile, User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 
+from django.db.models import Q
 
 # Create your views here.
 
@@ -71,14 +72,12 @@ def comment(request, post_id):
 
 @login_required(login_url='/accounts/login/')
 def search(request):
-    if 'profiles' in request.GET and request.GET['profiles']:
-        search_term = request.GET.get('profiles')
-        user = User.objects.filter(username=search_term)
-        profiles = Profile.objects.filter(username=user)
-        message = f'{search_term}'
-
-        return render(request, 'socials/search.html', {"message": message, "profiles": profiles})
+    query = request.GET.get('q')
+    print(query)
+    if query:
+        results = Projects.objects.filter(
+            Q(user__icontains=query))
     else:
-        message = "Please search for users"
+        results = Post.objects.all()
 
-    return render(request, 'socials/search.html', {"message": message, "profiles": profile})
+    return render(request, 'socials/search.html', {"message": message, "profiles": profile, "results":results})
