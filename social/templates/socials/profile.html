@@ -5,23 +5,26 @@
 
 {% block content %}
 <div class="container">
-    <h1>{{profile.name}}</h1>
-    <div class="container profile d-flex flex-row block-example border-bottom border-dark">
-        <div class="profile_info">
+    <div class="container profile block-example border-bottom border-dark">
+        <div class="profile_info  d-flex flex-row my-4">
             <div class="prof_image mr-4">
                 <img class="rounded-circle"
                      style="
                  width:12em;
                  height:auto;"
-                     src="{{profile.profile_picture.url}}">
+                     src="{{profile.profile_picture}}">
             </div>
             <div class="info ml-4">
                 <div class="username d-flex flex-row">
-                    <h3>ianodad</h3>
+                    <h3>{{profile.username}}</h3>
                     <button class="ml-4"
                             data-toggle="modal"
                             data-target="#editmodel">Edit Profile</button>
 
+                </div>
+                <div class="othernames">
+                    <h4>Other Names</h4>
+                    <p>{{profile.name}}</p>
                 </div>
                 <div class="pff d-flex flex-row mt-4">
                     <p class="p">0 posts</p>

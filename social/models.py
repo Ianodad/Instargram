@@ -27,6 +27,9 @@ class Profile(models.Model):
         self.profile_bio = update
         self.save()
 
+    def __str__(self):
+        return self.username
+
     @classmethod
     def get_profile(cls, name):
         profile = Profile.objects.filter(name=name)
@@ -78,6 +81,9 @@ class Post(models.Model):
     def get_all_posts(cls):
         posts = Post.objects.all()
         return posts
+
+    def __str__(self):
+        return self.image_name
 
     class Meta:
         ordering = ['-id']

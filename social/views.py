@@ -1,4 +1,5 @@
 from urllib import request
+from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import CommentForm, PostForm, ProfileForm
 from .models import Comment, Post, Profile, User
@@ -15,6 +16,7 @@ def home(request):
     word = "Hello Instargram"
 
     current_user = request.user
+    print(request.user)
 
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)
@@ -40,14 +42,19 @@ def profile(request):
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
             upload = form.save(commit=False)
-            upload.name = current_user
+            upload.username = current_user
             upload.save()
             return redirect('profile')
 
     else:
         formit = ProfileForm()
     posts = Post.get_post(current_user)
-    profile = Profile.get_profile(current_user)
+    # profile = Profile.objects.get(username=current_user)
+    try:
+        profile = get_object_or_404(Profile, username=request.user)
+    except ObjectDoesNotExist:
+        return redirect('home')
+        print("looking"+profile.image)
     return render(request, "socials/profile.html", {"profile": profile, "formit": formit, "posts": posts})
 
 
@@ -80,4 +87,4 @@ def search(request):
     else:
         results = Post.objects.all()
 
-    return render(request, 'socials/search.html', { "profiles": profile, "results":results})
+    return render(request, 'socials/search.html', {"profiles": profile, "results": results})
