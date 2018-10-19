@@ -5,10 +5,10 @@
         <a class="logo navbar-brand justify-content-center block-example border-left border-dark pl-4"
            href="{% url 'home' %}"
            style="font-family: 'Oleo Script', cursive; font-size:2em;">Instagram</a>
-        <div class="col-sm-6 col-md-6">
+        <div class="col-sm-6 col-md-6 ">
             {% if user.is_authenticated %}
-            <ul class="float-right">
-                <li class="dropdown">
+            <ul class="float-right navbar-nav">
+                <li class="dropdown nav-item">
                     <a href="/profile"
                        class="dropdown-toggle btn btn-default"
                        data-toggle="dropdown"
@@ -18,18 +18,20 @@
                     </a>
                     <ul class="dropdown-menu"
                         role="menu">
-                        <li>
-                            <a href="/profile">Profile</a>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="/profile">Profile</a>
                         </li>
-                        <li>
-                            <a href="/logout">Logout</a>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="/logout">Logout</a>
                         </li>
                     </ul>
                 </li>
             </ul>
             {% else %}
-            <li>
-                <a class='btn btn-default'
+            <li class="nav-item">
+                <a class='btn btn-default nav-link'
                    href="/accounts/login">Login</a>
             </li>
 
