@@ -80,4 +80,4 @@ def search(request):
     else:
         results = Post.objects.all()
 
-    return render(request, 'socials/search.html', {"message": message, "profiles": profile, "results":results})
+    return render(request, 'socials/search.html', { "profiles": profile, "results":results})
